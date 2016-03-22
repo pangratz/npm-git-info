@@ -113,4 +113,50 @@ describe('npm-git-info', function() {
     expect(subject.isInstalledAsNpmPackage()).to.be(true);
     expect(subject.hasVersionInRef()).to.be(true);
   });
+
+  it('should detect info from NPM installed package with a version', function() {
+    // this tests the result of: npm install ember-data
+    var subject = info(fixture('projects/tag/node_modules/ember-data/package.json'));
+
+    expect(subject).to.eql({
+      name: 'ember-data',
+      version: '2.4.0',
+      sha: '9f8c40927a5e8a7966c251d99eb26c3f1fb0606e',
+      abbreviatedSha: '9f8c40927a',
+      ref: '2.4.0'
+    });
+
+    expect(subject.isInstalledAsNpmPackage()).to.be(true);
+    expect(subject.hasVersionInRef()).to.be(true);
+  });
+
+  it('should detect info from NPM installed package with a version range', function() {
+    // this tests the result of: npm install ember-data
+    var subject = info(fixture('projects/range/node_modules/ember-data/package.json'));
+
+    expect(subject).to.eql({
+      name: 'ember-data',
+      version: '2.4.3',
+      ref: '2.4.3'
+    });
+
+    expect(subject.isInstalledAsNpmPackage()).to.be(true);
+    expect(subject.hasVersionInRef()).to.be(true);
+  });
+
+  it('should detect info from branch specification', function() {
+    var subject = info(fixture('projects/branch/node_modules/ember-data/package.json'));
+
+    expect(subject).to.eql({
+      name: 'ember-data',
+      version: "2.4.0-beta.1",
+      sha: "07ad5fe7e43216c5d9fd70412a9761d6c7164e88",
+      abbreviatedSha: "07ad5fe7e4",
+      ref: "2.4.0-beta.1"
+    });
+
+    expect(subject.isInstalledAsNpmPackage()).to.be(true);
+    expect(subject.hasVersionInRef()).to.be(true);
+  });
+
 });

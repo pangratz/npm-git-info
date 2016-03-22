@@ -15,6 +15,11 @@ module.exports = function npmGitInfo(package) {
   info.sha = package.gitHead;
   info.abbreviatedSha = package.gitHead && package.gitHead.slice(0, 10);
 
+  if (!info.sha) {
+    delete info.sha;
+    delete info.abbreviatedSha;
+  }
+
   var requested = package._requested;
   var type = requested && requested.type;
 

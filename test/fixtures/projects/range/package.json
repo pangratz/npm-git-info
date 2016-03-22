@@ -1,0 +1,9 @@
+{
+  "name": "tag",
+  "version": "1.0.0",
+  "description": "package.json with specific version range",
+  "devDependencies": {
+    "ember-data": "^2.4.3",
+    "ember-inflector": "^1.9.4"
+  }
+}

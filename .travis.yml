@@ -6,6 +6,21 @@ node_js:
   - 5.5
 before_install:
   - npm install -g npm@$NPM_VERSION
+
+before_script:
+  - cd $TRAVIS_BUILD_DIR/test/fixtures/projects/tag
+  - npm install
+
+  - cd $TRAVIS_BUILD_DIR/test/fixtures/projects/branch
+  - npm install
+
+  - cd $TRAVIS_BUILD_DIR/test/fixtures/projects/range
+  - npm install
+
+  - cd $TRAVIS_BUILD_DIR
+
+script: npm test
+
 env:
   - NPM_VERSION=1
   - NPM_VERSION=2
